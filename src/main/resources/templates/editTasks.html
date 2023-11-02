@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Task</title>
+</head>
+<body>
+
+<h2>Edit Task</h2>
+<form method="post" th:action="@{/editTasks/{id}(id=${task.id})}">
+  <input class="form-control" type="hidden" name="id" th:value="${task.id}">
+  <label>Topic: <input class="form-control" type="text" name="topic" minlength="1" th:value="${task.topic}"></label>
+  <label>Description: <input class="form-control" type="text" name="description" minlength="1" th:value="${task.description}"></label>
+  <label>Complexity: <input class="form-control" type="text" name="complexity" minlength="1" th:value="${task.complexity}"></label>
+  <label>Date of Issue: <input class="form-control" type="date" name="dateOfIssue" th:value="${#dates.format(task.dateOfIssue, 'yyyy-MM-dd')}"></label>
+  <label>Date of End: <input class="form-control" type="date" name="dateOfEnd" th:value="${#dates.format(task.dateOfEnd, 'yyyy-MM-dd')}"></label>
+  <button type="submit" class="operator btn btn-info">Save</button>
+</form>
+</body>
+</html>

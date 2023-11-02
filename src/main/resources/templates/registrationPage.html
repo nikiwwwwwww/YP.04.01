@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>AUTH</title>
+</head>
+<body>
+<div th:if="${message}">
+    Пользователь уже существует
+</div>
+<form th:action="@{/registration}" method="post">
+   <div> <label>Name: <input class="form-control" type="text" name="name" minlength="1" required></label></div>
+    <div><label>LastName: <input class="form-control" type="text" name="lastName" minlength="1" required></label></div>
+    <div> <label>MiddleName: <input class="form-control" type="text" name="middleName" minlength="1" required></label></div>
+    <div>  <label>DateOfEmployement: <input class="form-control" type="date" name="dateOfEmployment" required></label></div>
+    <div>  <label>Username: <input class="form-control" type="text" name="username" minlength="1" required></label></div>
+    <div>  <label>Password: <input class="form-control" type="text" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" required></label></div>
+    <div>  <label>PhoneNumber: <input class="form-control" type="text" name="phoneNumber" pattern="\+\d{1,3}\(\d{1,3}\)\d{3}-\d{2}-\d{2}" required></label></div>
+    <div>  <input type="submit" value="Регистрация"/></div>
+</form>
+</body>
+</html>

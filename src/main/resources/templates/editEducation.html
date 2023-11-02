@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Education</title>
+</head>
+<body>
+<h2>Edit Education</h2>
+<form method="post" th:action="@{/editEducation/{id}(id=${education.id})}">
+    <input class="form-control" type="hidden" name="id" th:value="${education.id}" minlength="1">
+    <label>Name: <input class="form-control" type="text" name="typeOfEducation" minlength="1" th:value="${education.typeOfEducation}"></label>
+    <label>Description: <input class="form-control" type="text" name="specialization" minlength="1" th:value="${education.specialization}"></label>
+    <label>Price: <input class="form-control" type="text" name="institution" minlength="1" th:value="${education.institution}"></label>
+    <button type="submit" class="operator btn btn-info">Save</button>
+</form>
+</body>
+</html>

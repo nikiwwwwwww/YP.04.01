@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Stake</title>
+</head>
+<body>
+
+<h2>Edit Stake</h2>
+<form method="post" th:action="@{/editStake/{id}(id=${stake.id})}">
+    <input type="hidden" name="id" th:value="${stake.id}">
+    <label>Count Days Worked: <input type="number" name="countDaysWorked" minlength="1" th:value="${stake.countDaysWorked}" required></label>
+    <label>Payment Per Day: <input type="number" name="paymentPerDay" minlength="1" th:value="${stake.paymentPerDay}" required></label>
+    <label>Date Of Salary: <input type="date" name="dateOfSalary" minlength="1" th:value="${stake.dateOfSalary}" required></label>
+    <label>Payment Per Shift: <input type="number" name="paymentPerShift" minlength="1" th:value="${stake.paymentPerShift}" required></label>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

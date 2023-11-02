@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Education Employe List</title>
+</head>
+<body>
+<h2>Education Employe List</h2>
+<br>
+<form th:action="@{/educationEmploye}" method="get">
+    <h3><label for="search">Search by name:</label></h3>
+    <input type="text" id="search" class="form-control" name="search" />
+    <br>
+    <button type="submit" class="operator btn btn-info">Search</button>
+</form>
+<br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Education</th>
+        <th>Employe</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="educationEmploye : ${educationEmployeList}">
+        <td th:text="${educationEmploye.id}"></td>
+        <td th:text="${educationEmploye.education.typeOfEducation}"></td>
+        <td th:text="${educationEmploye.employe.username}"></td>
+        <td>
+            <a th:href="@{'/editEducationEmploye/' + ${educationEmploye.id}}">Edit</a>
+            <a th:href="@{'/deleteEducationEmploye/' + ${educationEmploye.id}}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<form method="post" th:action="@{/addEducationEmploye}" th:object="${educationEmploye}">
+    <label>Education:</label>
+    <select name="educationId">
+        <!-- Populate options based on your Education entity -->
+        <option th:each="edu : ${education}" th:value="${edu.id}" th:text="${edu.typeOfEducation}"></option>
+    </select>
+
+    <label>Employe:</label>
+    <select name="employeId">
+        <!-- Populate options based on your Employe entity -->
+        <option th:each="emp : ${employe}" th:value="${emp.id}" th:text="${emp.username}"></option>
+    </select>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

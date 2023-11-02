@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Education Management</title>
+</head>
+<body>
+
+<h2>Education List</h2>
+<br>
+<form th:action="@{/educationPage}" method="get">
+    <h3><label for="search">Search by name:</label></h3>
+    <input type="text" id="search" class="form-control" name="search" />
+    <br>
+    <button type="submit" class="operator btn btn-info">Search</button>
+</form>
+<br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Type of Education</th>
+        <th>Specialization</th>
+        <th>Institution</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="education : ${educations}">
+        <td th:text="${education.id}"></td>
+        <td th:text="${education.typeOfEducation}"></td>
+        <td th:text="${education.specialization}"></td>
+        <td th:text="${education.institution}"></td>
+        <td>
+            <a th:href="@{'/editEducation/' + ${education.id}}">Edit</a>
+            <form method="post" th:action="@{'/deleteEducation/' + ${education.id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Add Education</h2>
+
+<form method="post" th:action="@{/addEducation}">
+    <label>Type of Education: <input type="text" minlength="1" name="typeOfEducation" required/></label><br/>
+    <label>Specialization: <input type="text"minlength="1"  name="specialization" required/></label><br/>
+    <label>Institution: <input type="text" minlength="1" name="institution" required/></label><br/>
+    <button type="submit">Add Education</button>
+</form>
+
+</body>
+</html>

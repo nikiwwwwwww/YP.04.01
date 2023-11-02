@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Stake Management</title>
+</head>
+<body>
+
+<h2>Stake List</h2>
+<br>
+<form th:action="@{/stakePage}" method="get">
+  <h3><label for="search">Search by CountDaysWorked:</label></h3>
+  <input type="number" id="search" class="form-control" name="search" />
+  <br>
+  <button type="submit" class="operator btn btn-info">Search</button>
+</form>
+<br>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Count Days Worked</th>
+    <th>Payment Per Day</th>
+    <th>Date Of Salary</th>
+    <th>Payment Per Shift</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="stake : ${stakes}">
+    <td th:text="${stake.id}"></td>
+    <td th:text="${stake.countDaysWorked}"></td>
+    <td th:text="${stake.paymentPerDay}"></td>
+    <td th:text="${stake.dateOfSalary}"></td>
+    <td th:text="${stake.paymentPerShift}"></td>
+    <td>
+      <a th:href="@{'/editStake/' + ${stake.id}}">Edit</a>
+      <form method="post" th:action="@{'/deleteStake/' + ${stake.id}}">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<h2>Add Stake</h2>
+
+<form method="post" th:action="@{/addStake}">
+  <label>Count Days Worked: <input type="number" minlength="1" name="countDaysWorked" required></label>
+  <label>Payment Per Day: <input type="number" minlength="1" name="paymentPerDay" required></label>
+  <label>Date Of Salary: <input type="date" minlength="1" name="dateOfSalary" required></label>
+  <label>Payment Per Shift: <input type="number" minlength="1" name="paymentPerShift" required></label>
+  <button type="submit">Add Stake</button>
+</form>
+
+</body>
+</html>

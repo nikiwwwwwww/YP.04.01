@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Post Employe Management</title>
+</head>
+<body>
+
+<h2>Post Employe List</h2>
+<br>
+<form th:action="@{/postEmployePage}" method="get">
+  <h3><label for="search">Search by name:</label></h3>
+  <input type="text" id="search" class="form-control" name="search" />
+  <br>
+  <button type="submit" class="operator btn btn-info">Search</button>
+</form>
+<br>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Post</th>
+    <th>Employe</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="postEmploye : ${postEmployes}">
+    <td th:text="${postEmploye.id}"></td>
+    <td th:text="${postEmploye.post.namePost}"></td>
+    <td th:text="${postEmploye.employe.username}"></td>
+    <td>
+      <a th:href="@{'/editPostEmploye/' + ${postEmploye.id}}">Edit</a>
+      <form method="post" th:action="@{'/deletePostEmploye/' + ${postEmploye.id}}">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<h2>Add Post Employe</h2>
+
+<form method="post" th:action="@{/addPostEmploye}">
+  <label>Post: </label>
+  <select name="postId">
+    <option th:each="post : ${posts}" th:value="${post.id}" th:text="${post.namePost}"></option>
+  </select>
+  <label>Employe: </label>
+  <select name="employeId">
+    <option th:each="employe : ${employes}" th:value="${employe.id}" th:text="${employe.username}"></option>
+  </select>
+  <button type="submit">Add Post Employe</button>
+</form>
+
+</body>
+</html>

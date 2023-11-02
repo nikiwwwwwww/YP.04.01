@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Salary</title>
+</head>
+<body>
+
+<h2>Edit Salary</h2>
+<form method="post" th:action="@{/editSalary/{id}(id=${salary.id})}">
+  <input class="form-control" type="hidden" name="id" th:value="${salary.id}">
+
+  <label>Post Employe:
+    <select name="postEmployeId" th:value="${salary.postEmploye.id}">
+      <option th:each="postEmploye : ${postEmployes}"
+              th:value="${postEmploye.id}"
+              th:text="${postEmploye.employe.username}"></option>
+    </select>
+  </label>
+
+  <label>Stake:
+    <select name="stakeId" th:value="${salary.stake.id}">
+      <option th:each="stake : ${stakes}"
+              th:value="${stake.id}"
+              th:text="${stake.countDaysWorked}"></option>
+    </select>
+  </label>
+
+  <button type="submit" class="operator btn btn-info">Save</button>
+</form>
+</body>
+</html>

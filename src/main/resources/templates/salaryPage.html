@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Salary Management</title>
+</head>
+<body>
+
+<h2>Salary List</h2>
+<br>
+<form th:action="@{/salaryPage}" method="get">
+    <h3><label for="search">Search by name:</label></h3>
+    <input type="text" id="search" class="form-control" name="search" />
+    <br>
+    <button type="submit" class="operator btn btn-info">Search</button>
+</form>
+<br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Post Employe</th>
+        <th>Stake</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="salary : ${salaries}">
+        <td th:text="${salary.id}"></td>
+        <td th:text="${salary.postEmploye.employe.username}"></td>
+        <td th:text="${salary.stake.countDaysWorked}"></td>
+        <td>
+            <a th:href="@{'/editSalary/' + ${salary.id}}">Edit</a>
+            <form method="post" th:action="@{'/deleteSalary/' + ${salary.id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Add Salary</h2>
+
+<form method="post" th:action="@{/addSalary}">
+    <label>Post Employe:
+        <select name="postEmployeId">
+            <option th:each="postEmploye : ${postEmployes}"
+                    th:value="${postEmploye.id}"
+                    th:text="${postEmploye.employe.username}"></option>
+        </select>
+    </label>
+
+    <label>Stake:
+        <select name="stakeId">
+            <option th:each="stake : ${stakes}"
+                    th:value="${stake.id}"
+                    th:text="${stake.countDaysWorked}"></option>
+        </select>
+    </label>
+
+    <button type="submit">Add Salary</button>
+</form>
+
+</body>
+</html>

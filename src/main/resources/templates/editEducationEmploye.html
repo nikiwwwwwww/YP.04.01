@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Education Employe</title>
+</head>
+<body>
+<h2>Edit Education Employe</h2>
+
+<form method="post" th:action="@{/editEducationEmploye/{id}(id=${educationEmploye.id})}" th:object="${educationEmploye}">
+    <input type="hidden" name="id" th:value="${educationEmploye.id}">
+
+    <label>Education:</label>
+    <select th:field="*{education}">
+        <option th:each="edu : ${education}" th:value="${edu.id}" th:text="${edu.typeOfEducation}"></option>
+    </select>
+
+    <label>Employe:</label>
+    <select th:field="*{employe}">
+        <option th:each="emp : ${employe}" th:value="${emp.id}" th:text="${emp.name}"></option>
+    </select>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

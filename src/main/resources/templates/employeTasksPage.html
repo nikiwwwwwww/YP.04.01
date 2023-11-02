@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Employe Tasks Management</title>
+</head>
+<body>
+
+<h2>Employe Tasks List</h2>
+<br>
+<form th:action="@{/employeTasksPage}" method="get">
+  <h3><label for="search">Search by name:</label></h3>
+  <input type="text" id="search" class="form-control" name="search" />
+  <br>
+  <button type="submit" class="operator btn btn-info">Search</button>
+</form>
+<br>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Task Topic</th>
+    <th>Employee Name</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="employeTasks : ${employeTasks}">
+    <td th:text="${employeTasks.id}"></td>
+    <td th:text="${employeTasks.tasks.topic}"></td>
+    <td th:text="${employeTasks.employe.username}"></td>
+    <td>
+      <a th:href="@{'/editEmployeTasks/' + ${employeTasks.id}}">Edit</a>
+      <form method="post" th:action="@{'/deleteEmployeTasks/' + ${employeTasks.id}}">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<h2>Assign Task to Employee</h2>
+
+<form method="post" th:action="@{/addEmployeTasks}" th:object="${employeTasks}">
+  <label>Education:</label>
+  <select name="employeId">
+    <!-- Populate options based on your Education entity -->
+    <option th:each="emp : ${employe}" th:value="${emp.id}" th:text="${emp.username}"></option>
+  </select>
+
+  <label>Employe:</label>
+  <select name="taskId">
+    <option th:each="task : ${tasks}" th:value="${task.id}" th:text="${task.topic}"></option>
+  </select>
+
+  <button type="submit">Save</button>
+</form>
+
+</body>
+</html>
